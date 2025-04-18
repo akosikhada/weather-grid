@@ -145,7 +145,7 @@ npm install
 
 ```bash
 # Create a .env file at the root with your OpenWeatherMap API key
-OPENWEATHER_API_KEY=your_api_key_here
+OPENWEATHER_API_KEY="your_api_key_here"
 ```
 
 4. Start the development server
