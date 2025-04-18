@@ -183,7 +183,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
     <td align="center">
       <b>Miguel Enrique Dasalla</b>
       <br />
-      Web Developer, Full-Stack Developer, Frontend Developer
+      Web Developer, Full-Stack Developer
     </td>
   </tr>
 </table>
