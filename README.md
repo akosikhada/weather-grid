@@ -176,8 +176,16 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - [Vercel](https://vercel.com/) for hosting and deployment
 - [Meteo-nix](https://github.com/DariusLukasukas/nextjs-weather-app) by Darius Lukasukas as an inspiration for modern weather app design and implementation
 
----
+## 👥 Developer/s
 
-<p align="center">
-  Made with ❤️ by <a href="https://github.com/akosikhada">akosikhada</a>
-</p>
+<table align="center">
+  <tr>
+    <td align="center">
+      <b>Miguel Enrique Dasalla</b>
+      <br />
+      Web Developer, Full-Stack Developer, Frontend Developer
+    </td>
+  </tr>
+</table>
+
+---
