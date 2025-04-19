@@ -33,7 +33,7 @@ import moment from "moment";
  */
 
 const Temperature = () => {
-  const forecastData = useGlobalContext();
+  const { forecastData, loading, errors } = useGlobalContext();
   const [localTime, setLocalTime] = useState<string>("");
   const [currentDay, setCurrentDay] = useState<string>("");
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -82,13 +82,37 @@ const Temperature = () => {
     if (timezoneRef.current === null) return;
 
     const localMoment = moment().utcOffset(timezoneRef.current / 60);
-    const formattedTime = localMoment.format("HH:mm:ss");
-    const formattedDay = localMoment.format("dddd");
+    const formattedTime = localMoment.format("hh:mm:ss A"); // 12 hour format
+    const formattedDay = localMoment.format("dddd"); // Day of the week
 
     setLocalTime(formattedTime);
     setCurrentDay(formattedDay);
   };
 
+  // Show loading state
+  if (loading?.forecast) {
+    return (
+      <div className="dark:bg-dark-grey flex h-56 flex-col items-center justify-center gap-3 rounded-lg border px-4 pt-6 pb-5 shadow-sm dark:shadow-none">
+        <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-blue-600"></div>
+        <p className="text-muted-foreground text-sm font-medium">
+          Fetching weather data...
+        </p>
+      </div>
+    );
+  }
+
+  // Show error state
+  if (errors?.forecast) {
+    return (
+      <div className="dark:bg-dark-grey flex h-56 flex-col items-center justify-center gap-3 rounded-lg border px-4 pt-6 pb-5 shadow-sm dark:shadow-none">
+        <p className="text-destructive text-sm font-medium">
+          Error: {errors.forecast}
+        </p>
+      </div>
+    );
+  }
+
+  // Check if data is available
   if (
     !forecastData ||
     !Object.keys(forecastData).length ||
@@ -98,7 +122,7 @@ const Temperature = () => {
       <div className="dark:bg-dark-grey flex h-56 flex-col items-center justify-center gap-3 rounded-lg border px-4 pt-6 pb-5 shadow-sm dark:shadow-none">
         <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-blue-600"></div>
         <p className="text-muted-foreground text-sm font-medium">
-          Fetching weather data...
+          Weather data unavailable
         </p>
       </div>
     );
