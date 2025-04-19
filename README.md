@@ -114,7 +114,10 @@ Weather Grid provides reliable, up-to-date weather information through a clean, 
         <img src="./public/icons/vercel.png" width="48" height="48" alt="Vercel" />
         <br />Vercel
       </td>
-      <td align="center" width="96"></td>
+      <td align="center" width="96">
+        <img src="./public/icons/openweather.png" width="48" height="48" alt="OpenWeather" />
+        <br />OpenWeather
+      </td>
     </tr>
   </table>
 </div>
@@ -145,7 +148,7 @@ npm install
 
 ```bash
 # Create a .env file at the root with your OpenWeatherMap API key
-OPENWEATHER_API_KEY="your_api_key_here"
+OPENWEATHER_API_KEY=your_api_key_here
 ```
 
 4. Start the development server
