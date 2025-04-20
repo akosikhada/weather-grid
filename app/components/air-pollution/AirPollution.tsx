@@ -35,7 +35,7 @@ const AirPollution = () => {
   // Show loading state
   if (loading?.airPollution) {
     return (
-      <div className="air-pollution sm-2:col-span-2 dark:bg-dark-grey col-span-full flex h-[12rem] flex-col items-center justify-center gap-3 rounded-lg border px-4 pt-6 shadow-sm dark:shadow-none">
+      <div className="air-pollution sm-2:col-span-2 dark:bg-dark-grey col-span-full flex h-[12rem] flex-col items-center justify-center gap-3 rounded-lg border px-4 pt-6 shadow-sm md:col-span-2 xl:col-span-2 dark:shadow-none">
         <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-blue-600"></div>
         <p className="text-muted-foreground text-sm font-medium">
           Fetching air pollution data...
@@ -47,7 +47,7 @@ const AirPollution = () => {
   // Show error state
   if (errors?.airPollution) {
     return (
-      <div className="air-pollution sm-2:col-span-2 dark:bg-dark-grey col-span-full flex h-[12rem] flex-col items-center justify-center gap-3 rounded-lg border px-4 pt-6 shadow-sm dark:shadow-none">
+      <div className="air-pollution sm-2:col-span-2 dark:bg-dark-grey col-span-full flex h-[12rem] flex-col items-center justify-center gap-3 rounded-lg border px-4 pt-6 shadow-sm md:col-span-2 xl:col-span-2 dark:shadow-none">
         <p className="text-destructive text-sm font-medium">
           Error loading air pollution data: {errors.airPollution}
         </p>
@@ -63,7 +63,7 @@ const AirPollution = () => {
     !airPollutionData.list[0].main
   ) {
     return (
-      <div className="air-pollution sm-2:col-span-2 dark:bg-dark-grey col-span-full flex h-[12rem] flex-col items-center justify-center gap-3 rounded-lg border px-4 pt-6 shadow-sm dark:shadow-none">
+      <div className="air-pollution sm-2:col-span-2 dark:bg-dark-grey col-span-full flex h-[12rem] flex-col items-center justify-center gap-3 rounded-lg border px-4 pt-6 shadow-sm md:col-span-2 xl:col-span-2 dark:shadow-none">
         <p className="text-muted-foreground text-sm font-medium">
           Air pollution data unavailable
         </p>
@@ -80,12 +80,12 @@ const AirPollution = () => {
   });
 
   return (
-    <div className="air-pollution sm-2:col-span-2 dark:bg-dark-grey col-span-full flex h-[12rem] flex-col gap-8 rounded-lg border p-4 pt-6 shadow-sm dark:shadow-none">
+    <div className="air-pollution sm-2:col-span-2 dark:bg-dark-grey col-span-full flex h-[12rem] flex-col gap-8 rounded-lg border p-4 pt-6 shadow-sm md:col-span-2 xl:col-span-2 dark:shadow-none">
       <h2 className="flex items-center gap-2 font-medium">
         {thermo} Air Pollution
       </h2>
       <Progress value={aqiValue} max={100} className="progress" />
-      <p className="">
+      <p className="text-base font-medium">
         The Air Quality is {aqiInfo?.description || "Unavailable"}.
       </p>
     </div>
