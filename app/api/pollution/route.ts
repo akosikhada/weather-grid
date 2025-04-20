@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
  * Air Pollution API endpoint handler
  *
  * Implements a stateless API route that retrieves current air pollution data from OpenWeatherMap.
- * Using predefined coordinates for Manila (14.65, 120.9667).
+ * Using predefined coordinates for Caloocan City (14.65, 120.9667).
  *
  * Security note: API key is stored in environment variables (.env), never exposed client-side.
  * Error handling: Returns standardized 500 response with message on failure.
