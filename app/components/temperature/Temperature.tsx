@@ -92,7 +92,7 @@ const Temperature = () => {
   // Show loading state
   if (loading?.forecast) {
     return (
-      <div className="dark:bg-dark-grey flex h-56 flex-col items-center justify-center gap-3 rounded-lg border px-4 pt-6 pb-5 shadow-sm dark:shadow-none">
+      <div className="dark:bg-dark-grey flex h-[25rem] flex-col items-center justify-center gap-3 rounded-lg border px-4 pt-6 pb-5 shadow-sm dark:shadow-none">
         <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-blue-600"></div>
         <p className="text-muted-foreground text-sm font-medium">
           Fetching weather data...
@@ -104,7 +104,7 @@ const Temperature = () => {
   // Show error state
   if (errors?.forecast) {
     return (
-      <div className="dark:bg-dark-grey flex h-56 flex-col items-center justify-center gap-3 rounded-lg border px-4 pt-6 pb-5 shadow-sm dark:shadow-none">
+      <div className="dark:bg-dark-grey flex h-[25rem] flex-col items-center justify-center gap-3 rounded-lg border px-4 pt-6 pb-5 shadow-sm dark:shadow-none">
         <p className="text-destructive text-sm font-medium">
           Error: {errors.forecast}
         </p>
@@ -119,7 +119,7 @@ const Temperature = () => {
     !forecastData.weather
   ) {
     return (
-      <div className="dark:bg-dark-grey flex h-56 flex-col items-center justify-center gap-3 rounded-lg border px-4 pt-6 pb-5 shadow-sm dark:shadow-none">
+      <div className="dark:bg-dark-grey flex h-[25rem] flex-col items-center justify-center gap-3 rounded-lg border px-4 pt-6 pb-5 shadow-sm dark:shadow-none">
         <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-blue-600"></div>
         <p className="text-muted-foreground text-sm font-medium">
           Weather data unavailable
@@ -155,22 +155,22 @@ const Temperature = () => {
   return (
     <div className="dark:bg-dark-grey flex flex-col justify-between rounded-lg border px-4 pt-6 pb-5 shadow-sm dark:shadow-none">
       <p className="flex items-center justify-between">
-        <span className="font-medium">{currentDay}</span>
-        <span className="font-medium">{localTime}</span>
+        <span className="font-semibold">{currentDay}</span>
+        <span className="font-semibold">{localTime}</span>
       </p>
-      <p className="flex gap-1 pt-2 font-bold">
-        <span>{name}</span>
-        <span>{navigation}</span>
+      <p className="flex gap-1 pt-2">
+        <span className="font-bold">{name}</span>
+        <span className="font-bold">{navigation}</span>
       </p>
-      <p className="self-center py-10 text-9xl font-bold">{temperature}°C</p>
-      <div>
-        <div>
+      <p className="self-center py-10 text-9xl font-black">{temperature}°C</p>
+      <div className="flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center">
           <span>{getWeatherIcon()}</span>
           <p className="pt-2 text-lg font-medium capitalize">{description}</p>
         </div>
         <p className="flex items-center gap-2">
-          <span>Low: {minimumTemperature}°C</span>
-          <span>High: {maximumTemperature}°C</span>
+          <span className="font-medium">Low: {minimumTemperature}°C</span>
+          <span className="font-medium">High: {maximumTemperature}°C</span>
         </p>
       </div>
     </div>
