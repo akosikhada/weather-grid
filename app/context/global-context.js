@@ -8,6 +8,7 @@ import React, {
   useCallback,
   useEffect,
 } from "react";
+import { DEFAULT_LATITUDE, DEFAULT_LONGITUDE } from "../utils/default-application";
 
 /**
  * Global Weather Context
@@ -18,7 +19,7 @@ import React, {
  * 3. Proper error handling with error states
  * 4. Memoized fetch functions to prevent unnecessary re-renders
  * 5. Consolidated state management for better performance
- * 6. Support for current and daily forecast data
+ * 6. Support for current, daily forecast, air pollution, and UV index data
  */
 
 const GlobalContext = createContext();
@@ -29,15 +30,18 @@ export const GlobalContextProvider = ({ children }) => {
     forecastData: {},
     airPollutionData: {},
     dailyForecastData: {},
+    uvData: {},
     loading: {
       forecast: false,
       airPollution: false,
       dailyForecast: false,
+      uv: false,
     },
     errors: {
       forecast: null,
       airPollution: null,
       dailyForecast: null,
+      uv: null,
     },
   });
 
@@ -51,12 +55,17 @@ export const GlobalContextProvider = ({ children }) => {
     }));
 
     try {
-      const response = await axios.get("/api/weather");
+      // Use default coordinates from constants
+      const lat = DEFAULT_LATITUDE;
+      const lon = DEFAULT_LONGITUDE;
+
+      const response = await axios.get(`/api/weather?lat=${lat}&lon=${lon}`);
       setState((prev) => ({
         ...prev,
         forecastData: response.data,
         loading: { ...prev.loading, forecast: false },
       }));
+
       return response.data;
     } catch (error) {
       console.error("Error Fetching Forecast Data:", error.message);
@@ -78,12 +87,17 @@ export const GlobalContextProvider = ({ children }) => {
     }));
 
     try {
-      const response = await axios.get("/api/pollution");
+      // Use default coordinates from constants
+      const lat = DEFAULT_LATITUDE;
+      const lon = DEFAULT_LONGITUDE;
+
+      const response = await axios.get(`/api/pollution?lat=${lat}&lon=${lon}`);
       setState((prev) => ({
         ...prev,
         airPollutionData: response.data,
         loading: { ...prev.loading, airPollution: false },
       }));
+
       return response.data;
     } catch (error) {
       console.error("Error Fetching Air Pollution Data:", error.message);
@@ -105,12 +119,19 @@ export const GlobalContextProvider = ({ children }) => {
     }));
 
     try {
-      const response = await axios.get("/api/daily-forecast");
+      // Use default coordinates from constants
+      const lat = DEFAULT_LATITUDE;
+      const lon = DEFAULT_LONGITUDE;
+
+      const response = await axios.get(
+        `/api/daily-forecast?lat=${lat}&lon=${lon}`,
+      );
       setState((prev) => ({
         ...prev,
         dailyForecastData: response.data,
         loading: { ...prev.loading, dailyForecast: false },
       }));
+
       return response.data;
     } catch (error) {
       console.error("Error Fetching Daily Forecast Data:", error.message);
@@ -123,6 +144,38 @@ export const GlobalContextProvider = ({ children }) => {
     }
   }, []);
 
+  // UV data fetch function
+  const fetchUVData = useCallback(async () => {
+    setState((prev) => ({
+      ...prev,
+      loading: { ...prev.loading, uv: true },
+      errors: { ...prev.errors, uv: null },
+    }));
+
+    try {
+      // Use default coordinates from constants
+      const lat = DEFAULT_LATITUDE;
+      const lon = DEFAULT_LONGITUDE;
+
+      const response = await axios.get(`/api/uv?lat=${lat}&lon=${lon}`);
+      setState((prev) => ({
+        ...prev,
+        uvData: response.data,
+        loading: { ...prev.loading, uv: false },
+      }));
+
+      return response.data;
+    } catch (error) {
+      console.error("Error Fetching UV Data:", error.message);
+      setState((prev) => ({
+        ...prev,
+        loading: { ...prev.loading, uv: false },
+        errors: { ...prev.errors, uv: error.message },
+      }));
+      return null;
+    }
+  }, []);
+
   // Fetch all data in parallel
   const fetchAllData = useCallback(async () => {
     // Run all fetch operations concurrently
@@ -130,8 +183,14 @@ export const GlobalContextProvider = ({ children }) => {
       fetchForecastData(),
       fetchAirPollutionData(),
       fetchDailyForecastData(),
+      fetchUVData(),
     ]);
-  }, [fetchForecastData, fetchAirPollutionData, fetchDailyForecastData]);
+  }, [
+    fetchForecastData,
+    fetchAirPollutionData,
+    fetchDailyForecastData,
+    fetchUVData,
+  ]);
 
   // Initial data fetch on mount
   useEffect(() => {
@@ -145,6 +204,7 @@ export const GlobalContextProvider = ({ children }) => {
           fetchForecastData,
           fetchAirPollutionData,
           fetchDailyForecastData,
+          fetchUVData,
           fetchAllData,
         }}
       >
