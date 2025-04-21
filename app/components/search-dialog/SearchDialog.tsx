@@ -10,6 +10,7 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
+import { Search } from "lucide-react";
 import React from "react";
 
 const SearchDialog = () => {
@@ -19,9 +20,12 @@ const SearchDialog = () => {
         <DialogTrigger asChild>
           <Button
             variant="outline"
-            className="inline-flex items-center justify-center border text-sm font-medium duration-200 ease-in-out hover:bg-slate-100 hover:dark:bg-[#131313]"
+            className="inline-flex h-10 w-full items-center justify-between px-3 duration-200 ease-in-out hover:bg-slate-100 hover:dark:bg-[#131313]"
           >
-            <p className="text-muted-foreground text-sm">Search Here...</p>
+            <div className="flex items-center">
+              <Search className="mr-2 h-4 w-4" />
+              <p className="text-muted-foreground text-sm">Search Here...</p>
+            </div>
             <div className="command ml-[10rem] flex items-center gap-2 rounded-sm bg-slate-200 py-[2px] pr-[7px] pl-[5px] dark:bg-[#262626]">
               {commandIcon}
               <span className="text-[9px]">WG</span>
