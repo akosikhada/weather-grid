@@ -49,27 +49,46 @@ export const unixToLocalTime = (
 export const airQualityIndex = [
   {
     rating: 20,
-    description:
-      "Excellent (AQI 0-20): Air quality is ideal for most individuals. No health concerns",
+    description: "Excellent - Clean air with no health risks.",
   },
   {
     rating: 40,
-    description:
-      "Fair (AQI 21-40): Air quality is acceptable. Some pollutants may affect very sensitive individuals",
+    description: "Fair - Good air quality with minimal concerns.",
   },
   {
     rating: 60,
-    description:
-      "Moderate (AQI 41-60): Health concerns for sensitive groups. General public is less likely to be affected",
+    description: "Moderate - May affect sensitive individuals.",
   },
   {
     rating: 80,
-    description:
-      "Poor (AQI 61-80): Everyone may begin to experience health effects. Sensitive groups may experience more serious effects",
+    description: "Poor - Health effects possible for everyone.",
   },
   {
     rating: 100,
-    description:
-      "Hazardous (AQI 81-100): Health alert - risk of health effects for everyone. Avoid outdoor activities",
+    description: "Hazardous - Serious health risks, avoid outdoor activities.",
   },
 ];
+
+/**
+ * Formats large numbers into human-readable format with K/M suffixes
+ *
+ * This utility function converts numbers into abbreviated forms:
+ * - Numbers over 1 million are shown as "X.XM" (e.g., 1,500,000 → 1.5M)
+ * - Numbers over 1 thousand are shown as "X.XK" (e.g., 1,500 → 1.5K)
+ * - Smaller numbers are returned as-is
+ *
+ * Used for displaying large numbers (like population) in a compact, readable format
+ *
+ * @param {number} num - The number to format
+ * @returns {string|number} Formatted string with suffix or original number
+ */
+
+export const formatNumber = (num: number) => {
+  if (num >= 1000000) {
+    return (num / 1000000).toFixed(1) + "M";
+  } else if (num >= 1000) {
+    return (num / 1000).toFixed(1) + "K";
+  } else {
+    return num;
+  }
+};
