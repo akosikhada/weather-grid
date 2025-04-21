@@ -80,13 +80,22 @@ const AirPollution = () => {
   });
 
   return (
-    <div className="air-pollution sm-2:col-span-2 dark:bg-dark-grey col-span-full flex h-[12rem] flex-col gap-8 rounded-lg border p-4 pt-6 shadow-sm md:col-span-2 xl:col-span-2 dark:shadow-none">
+    <div className="air-pollution sm-2:col-span-2 dark:bg-dark-grey col-span-full flex h-[12rem] flex-col gap-6 rounded-lg border p-4 pt-6 shadow-sm md:col-span-2 xl:col-span-2 dark:shadow-none">
       <h2 className="flex items-center gap-2 font-medium">
         {thermo} Air Pollution
       </h2>
-      <Progress value={aqiValue} max={100} className="progress" />
-      <p className="text-base font-medium">
-        The Air Quality is {aqiInfo?.description || "Unavailable"}.
+      <div className="flex flex-col gap-1">
+        <div className="flex justify-between text-sm">
+          <span>
+            Air Quality Index:{" "}
+            <strong>{airPollutionData.list[0].main.aqi}</strong> (1-5 scale)
+          </span>
+          <span className="font-medium">{aqiValue}%</span>
+        </div>
+        <Progress value={aqiValue} max={100} className="progress" />
+      </div>
+      <p className="text-sm">
+        The Air Quality is {aqiInfo?.description || "Unavailable"}
       </p>
     </div>
   );
