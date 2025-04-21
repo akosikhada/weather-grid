@@ -103,9 +103,7 @@ const Wind = () => {
 
   return (
     <div className="dark:bg-dark-grey flex h-[12rem] flex-col justify-between rounded-lg border p-4 shadow-sm dark:shadow-none">
-      <h2 className="mb-2 flex items-center gap-2 text-sm font-medium">
-        {wind} Wind
-      </h2>
+      <h2 className="mb-2 flex items-center gap-2 font-medium">{wind} Wind</h2>
 
       <div className="flex flex-1 items-center justify-center">
         <div className="relative">
@@ -116,7 +114,7 @@ const Wind = () => {
               alt="Compass Body"
               width={120}
               height={120}
-              priority
+              quality={100}
               className="h-[120px] w-[120px] dark:opacity-90"
             />
 
@@ -128,6 +126,7 @@ const Wind = () => {
                   alt="Wind Direction"
                   width={12}
                   height={120}
+                  quality={100}
                   className="h-auto w-[12px] dark:invert"
                 />
               </div>
@@ -136,9 +135,7 @@ const Wind = () => {
 
           {/* Wind speed */}
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-            <p className="text-center text-sm font-medium">
-              {displayWindSpeed} km/h
-            </p>
+            <p className="text-sm font-medium">{displayWindSpeed} km/h</p>
           </div>
         </div>
       </div>
