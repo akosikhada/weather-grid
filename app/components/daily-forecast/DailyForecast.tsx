@@ -123,7 +123,7 @@ const DailyForecast = () => {
 
   return (
     <div className="sm-2:col-span-2 dark:bg-dark-grey col-span-full flex h-[12rem] flex-col rounded-lg border p-4 shadow-sm md:col-span-2 xl:col-span-2 dark:shadow-none">
-      <h2 className="flex items-center gap-2 text-sm font-medium">
+      <h2 className="flex items-center gap-2 font-medium">
         {calender} Daily Forecast
       </h2>
       <div className="flex h-full w-full items-center justify-between">
@@ -144,13 +144,19 @@ const DailyForecast = () => {
                   key={`forecast-${index}`}
                   className="flex flex-col items-center justify-center gap-2"
                 >
-                  <p className="text-sm text-gray-300">
+                  <p
+                    className={
+                      isToday
+                        ? "text-sm font-semibold text-black dark:text-white"
+                        : "text-sm text-gray-600 dark:text-gray-300"
+                    }
+                  >
                     {isToday ? "Today" : forecastDate.format("ddd")}
                   </p>
-                  <div className="mt-2 text-3xl">
+                  <div className="mt-2 text-3xl text-gray-800 dark:text-gray-200">
                     {getWeatherIcon(weatherCondition)}
                   </div>
-                  <p className="mt-2 text-xl font-medium">
+                  <p className="mt-2 text-xl font-medium text-gray-900 dark:text-white">
                     {kelvinToCelsius(forecast.main.temp)}°C
                   </p>
                 </div>
