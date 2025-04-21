@@ -88,14 +88,14 @@ const Sunset = () => {
   return (
     <div className="dark:bg-dark-grey flex h-[12rem] flex-col justify-between rounded-lg border p-4 shadow-sm dark:shadow-none">
       <div className="sunset-section">
-        <h2 className="mb-2 flex items-center gap-2 text-sm font-medium">
+        <h2 className="mb-2 flex items-center gap-2 font-medium">
           {sunset} Sunset
         </h2>
         <p className="text-3xl font-semibold">{sunsetTime}</p>
       </div>
 
       <div className="sunrise-section">
-        <h2 className="mb-2 flex items-center gap-2 text-sm font-medium">
+        <h2 className="mb-2 flex items-center gap-2 font-medium">
           {sunrise} Sunrise
         </h2>
         <p className="text-3xl font-semibold">{sunriseTime}</p>
