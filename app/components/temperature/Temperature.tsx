@@ -12,6 +12,7 @@ import {
 import { kelvinToCelsius } from "@/app/utils/mist";
 import React, { useState, useEffect, useRef } from "react";
 import moment from "moment";
+import { Skeleton } from "@/components/ui/skeleton";
 
 /**
  * Temperature Component
@@ -33,7 +34,7 @@ import moment from "moment";
  */
 
 const Temperature = () => {
-  const { forecastData, loading, errors } = useGlobalContext();
+  const { forecastData, isLoading, errors } = useGlobalContext();
   const [localTime, setLocalTime] = useState<string>("");
   const [currentDay, setCurrentDay] = useState<string>("");
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -90,13 +91,10 @@ const Temperature = () => {
   };
 
   // Show loading state
-  if (loading?.forecast) {
+  if (isLoading?.forecast) {
     return (
-      <div className="dark:bg-dark-grey flex h-[25rem] flex-col items-center justify-center gap-3 rounded-lg border px-4 pt-6 pb-5 shadow-sm dark:shadow-none">
-        <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-blue-600"></div>
-        <p className="text-muted-foreground text-sm font-medium">
-          Fetching weather data...
-        </p>
+      <div className="dark:bg-dark-grey relative h-[25rem] overflow-hidden rounded-lg border p-4 shadow-sm dark:shadow-none">
+        <Skeleton className="absolute inset-0 h-full w-full" />
       </div>
     );
   }
@@ -120,9 +118,8 @@ const Temperature = () => {
   ) {
     return (
       <div className="dark:bg-dark-grey flex h-[25rem] flex-col items-center justify-center gap-3 rounded-lg border px-4 pt-6 pb-5 shadow-sm dark:shadow-none">
-        <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-blue-600"></div>
         <p className="text-muted-foreground text-sm font-medium">
-          Weather data unavailable
+          Weather data is currently unavailable. Please check back later.
         </p>
       </div>
     );
