@@ -30,16 +30,13 @@ import React from "react";
  */
 
 const AirPollution = () => {
-  const { airPollutionData, loading, errors } = useGlobalContext();
+  const { airPollutionData, isLoading, errors } = useGlobalContext();
 
   // Show loading state
-  if (loading?.airPollution) {
+  if (isLoading?.airPollution) {
     return (
-      <div className="air-pollution sm-2:col-span-2 dark:bg-dark-grey col-span-full flex h-[12rem] flex-col items-center justify-center gap-3 rounded-lg border px-4 pt-6 shadow-sm md:col-span-2 xl:col-span-2 dark:shadow-none">
-        <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-blue-600"></div>
-        <p className="text-muted-foreground text-sm font-medium">
-          Fetching air pollution data...
-        </p>
+      <div className="air-pollution sm-2:col-span-2 dark:bg-dark-grey relative col-span-full h-[12rem] overflow-hidden rounded-lg border p-4 shadow-sm md:col-span-2 xl:col-span-2 dark:shadow-none">
+        <Skeleton className="absolute inset-0 h-full w-full" />
       </div>
     );
   }
@@ -65,7 +62,7 @@ const AirPollution = () => {
     return (
       <div className="air-pollution sm-2:col-span-2 dark:bg-dark-grey col-span-full flex h-[12rem] flex-col items-center justify-center gap-3 rounded-lg border px-4 pt-6 shadow-sm md:col-span-2 xl:col-span-2 dark:shadow-none">
         <p className="text-muted-foreground text-sm font-medium">
-          Air pollution data unavailable
+          Air pollution data is currently unavailable. Please check back later.
         </p>
       </div>
     );
@@ -94,8 +91,8 @@ const AirPollution = () => {
         </div>
         <Progress value={aqiValue} max={100} className="progress" />
       </div>
-      <p className="text-sm">
-        The Air Quality is {aqiInfo?.description || "Unavailable"}
+      <p className="text-[15px]">
+        Air Quality is {aqiInfo?.description || "Unavailable"}
       </p>
     </div>
   );
