@@ -4,6 +4,7 @@ import { useGlobalContext } from "@/app/context/global-context";
 import { sunrise, sunset } from "@/app/utils/icons";
 import { unixToLocalTime } from "@/app/utils/mist";
 import React from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 /**
  * Sunset/Sunrise Component
@@ -34,18 +35,15 @@ import React from "react";
 
 const Sunset = () => {
   const state = useGlobalContext();
-  const loading = state?.loading?.forecast;
+  const isLoading = state?.isLoading?.forecast;
   const errors = state?.errors?.forecast;
   const forecastData = state?.forecastData;
 
   // Show loading state
-  if (loading) {
+  if (isLoading) {
     return (
-      <div className="dark:bg-dark-grey flex h-[12rem] flex-col items-center justify-center rounded-lg border px-4 shadow-sm dark:shadow-none">
-        <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-blue-600"></div>
-        <p className="text-muted-foreground mt-2 text-sm">
-          Loading sunset data...
-        </p>
+      <div className="dark:bg-dark-grey relative h-[12rem] overflow-hidden rounded-lg border p-4 shadow-sm dark:shadow-none">
+        <Skeleton className="absolute inset-0 h-full w-full" />
       </div>
     );
   }
@@ -69,7 +67,7 @@ const Sunset = () => {
     return (
       <div className="dark:bg-dark-grey flex h-[12rem] flex-col items-center justify-center rounded-lg border px-4 shadow-sm dark:shadow-none">
         <p className="text-muted-foreground text-sm font-medium">
-          Sunset/sunrise data unavailable
+          Sunset/sunrise data is currently unavailable. Please check back later.
         </p>
       </div>
     );
@@ -91,14 +89,14 @@ const Sunset = () => {
         <h2 className="mb-2 flex items-center gap-2 font-medium">
           {sunset} Sunset
         </h2>
-        <p className="text-3xl font-semibold">{sunsetTime}</p>
+        <p className="text-[26px] font-semibold">{sunsetTime}</p>
       </div>
 
       <div className="sunrise-section">
         <h2 className="mb-2 flex items-center gap-2 font-medium">
           {sunrise} Sunrise
         </h2>
-        <p className="text-3xl font-semibold">{sunriseTime}</p>
+        <p className="text-[26px] font-semibold">{sunriseTime}</p>
       </div>
     </div>
   );
