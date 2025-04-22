@@ -12,6 +12,7 @@ import {
 import { kelvinToCelsius } from "@/app/utils/mist";
 import moment from "moment";
 import React from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 /**
  * Daily Forecast Component
@@ -19,17 +20,14 @@ import React from "react";
  * Displays weather forecast data for the upcoming days in an easy-to-read format.
  */
 const DailyForecast = () => {
-  const { dailyForecastData, loading, errors } = useGlobalContext();
+  const { dailyForecastData, isLoading, errors } = useGlobalContext();
   const { city, list } = dailyForecastData || {};
 
   // Show loading state
-  if (loading?.dailyForecast) {
+  if (isLoading?.dailyForecast) {
     return (
-      <div className="sm-2:col-span-2 dark:bg-dark-grey col-span-full flex h-[12rem] flex-col items-center justify-center gap-3 rounded-lg border px-4 pt-6 shadow-sm md:col-span-2 xl:col-span-2 dark:shadow-none">
-        <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-blue-600"></div>
-        <p className="text-muted-foreground text-sm font-medium">
-          Loading forecast data...
-        </p>
+      <div className="sm-2:col-span-2 dark:bg-dark-grey relative col-span-full h-[12rem] overflow-hidden rounded-lg border p-4 shadow-sm md:col-span-2 xl:col-span-2 dark:shadow-none">
+        <Skeleton className="absolute inset-0 h-full w-full" />
       </div>
     );
   }
@@ -45,12 +43,12 @@ const DailyForecast = () => {
     );
   }
 
-  // Check if data is available
+  // Validate data integrity before proceeding with daily forecast rendering
   if (!dailyForecastData || !city || !list) {
     return (
       <div className="sm-2:col-span-2 dark:bg-dark-grey col-span-full flex h-[12rem] flex-col items-center justify-center gap-3 rounded-lg border px-4 pt-6 shadow-sm md:col-span-2 xl:col-span-2 dark:shadow-none">
         <p className="text-muted-foreground text-sm font-medium">
-          Daily forecast data unavailable
+          Daily forecast data is currently unavailable. Please check back later.
         </p>
       </div>
     );
@@ -153,10 +151,10 @@ const DailyForecast = () => {
                   >
                     {isToday ? "Today" : forecastDate.format("ddd")}
                   </p>
-                  <div className="mt-2 text-3xl text-gray-800 dark:text-gray-200">
+                  <div className="mt-2 text-3xl font-medium">
                     {getWeatherIcon(weatherCondition)}
                   </div>
-                  <p className="mt-2 text-xl font-medium text-gray-900 dark:text-white">
+                  <p className="mt-2 text-xl font-medium">
                     {kelvinToCelsius(forecast.main.temp)}°C
                   </p>
                 </div>
