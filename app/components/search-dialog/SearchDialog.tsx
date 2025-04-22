@@ -26,7 +26,7 @@ const SearchDialog = () => {
               <Search className="mr-2 h-4 w-4" />
               <p className="text-muted-foreground text-sm">Search Here...</p>
             </div>
-            <div className="command ml-[10rem] flex items-center gap-2 rounded-sm bg-slate-200 py-[2px] pr-[7px] pl-[5px] dark:bg-[#262626]">
+            <div className="command ml-0 flex items-center gap-2 rounded-sm bg-slate-200 py-[2px] pr-[7px] pl-[5px] sm:ml-[10rem] dark:bg-[#262626]">
               {commandIcon}
               <span className="text-[9px]">WG</span>
             </div>
