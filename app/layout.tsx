@@ -10,9 +10,9 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Weather Grid",
+  title: "Weather Grid | Real-time Grid-based Meteorological Dashboard",
   description:
-    "An advanced grid-based meteorological platform delivering precise weather analytics and forecasting with an intuitive, responsive interface powered by React and Tailwind CSS. ",
+    "Weather Grid provides reliable, up-to-date weather information through a clean, intuitive interface. Our grid-based layout presents current conditions and forecasts in an instantly understandable format, making complex meteorological data accessible. Meticulously designed for both functionality and aesthetics, Weather Grid delivers a seamless experience across all devices with precision analytics and responsive design.",
   icons: {
     icon: [
       { url: "/favicon/favicon.ico" },
