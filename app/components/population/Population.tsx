@@ -5,9 +5,10 @@ import { people } from "@/app/utils/icons";
 import { formatNumber } from "@/app/utils/mist";
 import { DEFAULT_CITY_POPULATION } from "@/app/utils/default-application";
 import React, { useEffect, useState } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 function Population() {
-  const { dailyForecastData, loading, errors } = useGlobalContext();
+  const { dailyForecastData, isLoading, errors } = useGlobalContext();
   const [population, setPopulation] = useState(null);
   const [cityName, setCityName] = useState("");
 
@@ -23,13 +24,10 @@ function Population() {
   }, [dailyForecastData]);
 
   // Show loading state
-  if (loading?.dailyForecast) {
+  if (isLoading?.dailyForecast) {
     return (
-      <div className="dark:bg-dark-grey flex h-[12rem] flex-col items-center justify-center gap-3 rounded-lg border p-4 shadow-sm dark:shadow-none">
-        <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-blue-600"></div>
-        <p className="text-muted-foreground text-sm font-medium">
-          Loading population data...
-        </p>
+      <div className="dark:bg-dark-grey relative h-[12rem] overflow-hidden rounded-lg border p-4 shadow-sm dark:shadow-none">
+        <Skeleton className="absolute inset-0 h-full w-full" />
       </div>
     );
   }
@@ -45,12 +43,12 @@ function Population() {
     );
   }
 
-  // Check if data is available
+  // Validate data integrity before proceeding with population rendering
   if (!population) {
     return (
       <div className="dark:bg-dark-grey flex h-[12rem] flex-col items-center justify-center gap-3 rounded-lg border p-4 shadow-sm dark:shadow-none">
         <p className="text-muted-foreground text-sm font-medium">
-          Population data unavailable
+          Population data is currently unavailable. Please check back later.
         </p>
       </div>
     );
@@ -65,10 +63,12 @@ function Population() {
         {people} Population
       </h2>
       <div className="flex flex-col items-center justify-center">
-        <span className="text-3xl font-bold">{formatNumber(population)}</span>
-        <span className="text-base">Residents</span>
+        <span className="text-[26px] font-bold">
+          {formatNumber(population)}
+        </span>
+        <span className="text-[15px]">Residents</span>
       </div>
-      <p className="text-sm">Estimated population data for {cityName}.</p>
+      <p className="text-[13px]">Estimated population data for {cityName}.</p>
     </div>
   );
 }
