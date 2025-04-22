@@ -49,23 +49,23 @@ export const unixToLocalTime = (
 export const airQualityIndex = [
   {
     rating: 20,
-    description: "Excellent - Clean air with no health risks.",
+    description: "EXCELLENT! Safe for all activities.",
   },
   {
     rating: 40,
-    description: "Fair - Good air quality with minimal concerns.",
+    description: "FAIR! Good for most outdoor activities.",
   },
   {
     rating: 60,
-    description: "Moderate - May affect sensitive individuals.",
+    description: "MODERATE! Sensitive groups should limit exposure.",
   },
   {
     rating: 80,
-    description: "Poor - Health effects possible for everyone.",
+    description: "POOR! Everyone should reduce outdoor activity.",
   },
   {
     rating: 100,
-    description: "Hazardous - Serious health risks, avoid outdoor activities.",
+    description: "HAZARDOUS! Avoid outdoor activities entirely.",
   },
 ];
 
