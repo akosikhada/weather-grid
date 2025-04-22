@@ -37,7 +37,7 @@ const NavBar = () => {
           variant="ghost"
           size="icon"
           onClick={toggleMenu}
-          className="h-10 w-10 lg:hidden"
+          className="h-10 w-10 cursor-pointer lg:hidden"
         >
           {isMenuOpen ? (
             <X className="h-8 w-8" />
@@ -52,7 +52,7 @@ const NavBar = () => {
           <ThemeDropdown />
           <Button
             variant="outline"
-            className="source-code flex h-9 items-center px-3"
+            className="source-code flex h-9 cursor-pointer items-center px-3"
             onClick={() =>
               router.push("https://github.com/akosikhada/weather-grid")
             }
@@ -71,7 +71,7 @@ const NavBar = () => {
             <ThemeDropdown />
             <Button
               variant="outline"
-              className="source-code flex h-10 w-full items-center justify-center px-3"
+              className="source-code flex h-10 w-full cursor-pointer items-center justify-center px-3"
               onClick={() =>
                 router.push("https://github.com/akosikhada/weather-grid")
               }
