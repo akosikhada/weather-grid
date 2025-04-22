@@ -4,6 +4,7 @@ import { useGlobalContext } from "@/app/context/global-context";
 import { sun } from "@/app/utils/icons";
 import React from "react";
 import { UvProgress } from "../uv-progress/UvProgress";
+import { Skeleton } from "@/components/ui/skeleton";
 
 /**
  * UV Index Component
@@ -13,16 +14,13 @@ import { UvProgress } from "../uv-progress/UvProgress";
  */
 
 const UvIndex = () => {
-  const { uvData, loading, errors } = useGlobalContext();
+  const { uvData, isLoading, errors } = useGlobalContext();
 
   // Show loading state
-  if (loading?.uv) {
+  if (isLoading?.uv) {
     return (
-      <div className="dark:bg-dark-grey flex h-[12rem] flex-col items-center justify-center gap-3 rounded-lg border p-4 shadow-sm dark:shadow-none">
-        <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-blue-600"></div>
-        <p className="text-muted-foreground text-sm font-medium">
-          Loading UV data...
-        </p>
+      <div className="dark:bg-dark-grey relative h-[12rem] overflow-hidden rounded-lg border p-4 shadow-sm dark:shadow-none">
+        <Skeleton className="absolute inset-0 h-full w-full" />
       </div>
     );
   }
@@ -38,11 +36,12 @@ const UvIndex = () => {
     );
   }
 
+  // Validate data integrity before proceeding with UV index rendering
   if (!uvData || !uvData.daily) {
     return (
       <div className="dark:bg-dark-grey flex h-[12rem] flex-col items-center justify-center gap-3 rounded-lg border p-4 shadow-sm dark:shadow-none">
         <p className="text-muted-foreground text-sm font-medium">
-          UV Index data unavailable
+          UV Index data is currently unavailable. Please check back later.
         </p>
       </div>
     );
@@ -106,8 +105,8 @@ const UvIndex = () => {
     <div className="dark:bg-dark-grey flex h-[12rem] flex-col justify-between rounded-lg border p-4 shadow-sm dark:shadow-none">
       <h2 className="flex items-center gap-2 font-medium">{sun} UV Index</h2>
       <div className="flex flex-col items-center justify-center">
-        <span className="text-3xl font-bold">{uvDataMax}</span>
-        <span className={`${category.color} text-base`}>
+        <span className="text-[26px] font-bold">{uvDataMax}</span>
+        <span className={`${category.color} text-[15px]`}>
           --- {category.text} ---
         </span>
       </div>
@@ -118,7 +117,7 @@ const UvIndex = () => {
           className="progress"
         />
       </div>
-      <p className="text-sm">{category.description}</p>
+      <p className="text-[13px]">{category.description}</p>
     </div>
   );
 };
