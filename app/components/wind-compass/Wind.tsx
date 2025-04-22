@@ -36,7 +36,7 @@ import gsap from "gsap";
  */
 
 const Wind = () => {
-  const { forecastData, loading, errors } = useGlobalContext();
+  const { forecastData, isLoading, errors } = useGlobalContext();
   const arrowContainerRef = useRef(null);
 
   // Extract wind data from forecast
@@ -61,13 +61,10 @@ const Wind = () => {
   }, [windDir]); // Re-run when wind direction changes
 
   // Show loading state when data is being fetched
-  if (loading?.forecast) {
+  if (isLoading?.forecast) {
     return (
-      <div className="dark:bg-dark-grey flex h-[12rem] flex-col items-center justify-center rounded-lg border px-4 shadow-sm dark:shadow-none">
-        <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-blue-600"></div>
-        <p className="text-muted-foreground mt-2 text-sm">
-          Loading wind data...
-        </p>
+      <div className="dark:bg-dark-grey relative h-[12rem] overflow-hidden rounded-lg border p-4 shadow-sm dark:shadow-none">
+        <Skeleton className="absolute inset-0 h-full w-full" />
       </div>
     );
   }
@@ -91,7 +88,7 @@ const Wind = () => {
     return (
       <div className="dark:bg-dark-grey flex h-[12rem] flex-col items-center justify-center rounded-lg border px-4 shadow-sm dark:shadow-none">
         <p className="text-muted-foreground text-sm font-medium">
-          Wind data unavailable
+          Wind data is currently unavailable. Please check back later.
         </p>
       </div>
     );
@@ -135,7 +132,7 @@ const Wind = () => {
 
           {/* Wind speed */}
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-            <p className="text-sm font-medium">{displayWindSpeed} km/h</p>
+            <p className="text-[13px] font-medium">{displayWindSpeed} km/h</p>
           </div>
         </div>
       </div>
