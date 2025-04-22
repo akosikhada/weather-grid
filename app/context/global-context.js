@@ -8,7 +8,10 @@ import React, {
   useCallback,
   useEffect,
 } from "react";
-import { DEFAULT_LATITUDE, DEFAULT_LONGITUDE } from "../utils/default-application";
+import {
+  DEFAULT_LATITUDE,
+  DEFAULT_LONGITUDE,
+} from "../utils/default-application";
 
 /**
  * Global Weather Context
@@ -31,7 +34,7 @@ export const GlobalContextProvider = ({ children }) => {
     airPollutionData: {},
     dailyForecastData: {},
     uvData: {},
-    loading: {
+    isLoading: {
       forecast: false,
       airPollution: false,
       dailyForecast: false,
@@ -50,7 +53,7 @@ export const GlobalContextProvider = ({ children }) => {
   const fetchForecastData = useCallback(async () => {
     setState((prev) => ({
       ...prev,
-      loading: { ...prev.loading, forecast: true },
+      isLoading: { ...prev.isLoading, forecast: true },
       errors: { ...prev.errors, forecast: null },
     }));
 
@@ -63,7 +66,7 @@ export const GlobalContextProvider = ({ children }) => {
       setState((prev) => ({
         ...prev,
         forecastData: response.data,
-        loading: { ...prev.loading, forecast: false },
+        isLoading: { ...prev.isLoading, forecast: false },
       }));
 
       return response.data;
@@ -71,7 +74,7 @@ export const GlobalContextProvider = ({ children }) => {
       console.error("Error Fetching Forecast Data:", error.message);
       setState((prev) => ({
         ...prev,
-        loading: { ...prev.loading, forecast: false },
+        isLoading: { ...prev.isLoading, forecast: false },
         errors: { ...prev.errors, forecast: error.message },
       }));
       return null;
@@ -82,7 +85,7 @@ export const GlobalContextProvider = ({ children }) => {
   const fetchAirPollutionData = useCallback(async () => {
     setState((prev) => ({
       ...prev,
-      loading: { ...prev.loading, airPollution: true },
+      isLoading: { ...prev.isLoading, airPollution: true },
       errors: { ...prev.errors, airPollution: null },
     }));
 
@@ -95,7 +98,7 @@ export const GlobalContextProvider = ({ children }) => {
       setState((prev) => ({
         ...prev,
         airPollutionData: response.data,
-        loading: { ...prev.loading, airPollution: false },
+        isLoading: { ...prev.isLoading, airPollution: false },
       }));
 
       return response.data;
@@ -103,7 +106,7 @@ export const GlobalContextProvider = ({ children }) => {
       console.error("Error Fetching Air Pollution Data:", error.message);
       setState((prev) => ({
         ...prev,
-        loading: { ...prev.loading, airPollution: false },
+        isLoading: { ...prev.isLoading, airPollution: false },
         errors: { ...prev.errors, airPollution: error.message },
       }));
       return null;
@@ -114,7 +117,7 @@ export const GlobalContextProvider = ({ children }) => {
   const fetchDailyForecastData = useCallback(async () => {
     setState((prev) => ({
       ...prev,
-      loading: { ...prev.loading, dailyForecast: true },
+      isLoading: { ...prev.isLoading, dailyForecast: true },
       errors: { ...prev.errors, dailyForecast: null },
     }));
 
@@ -129,7 +132,7 @@ export const GlobalContextProvider = ({ children }) => {
       setState((prev) => ({
         ...prev,
         dailyForecastData: response.data,
-        loading: { ...prev.loading, dailyForecast: false },
+        isLoading: { ...prev.isLoading, dailyForecast: false },
       }));
 
       return response.data;
@@ -137,7 +140,7 @@ export const GlobalContextProvider = ({ children }) => {
       console.error("Error Fetching Daily Forecast Data:", error.message);
       setState((prev) => ({
         ...prev,
-        loading: { ...prev.loading, dailyForecast: false },
+        isLoading: { ...prev.isLoading, dailyForecast: false },
         errors: { ...prev.errors, dailyForecast: error.message },
       }));
       return null;
@@ -148,7 +151,7 @@ export const GlobalContextProvider = ({ children }) => {
   const fetchUVData = useCallback(async () => {
     setState((prev) => ({
       ...prev,
-      loading: { ...prev.loading, uv: true },
+      isLoading: { ...prev.isLoading, uv: true },
       errors: { ...prev.errors, uv: null },
     }));
 
@@ -161,7 +164,7 @@ export const GlobalContextProvider = ({ children }) => {
       setState((prev) => ({
         ...prev,
         uvData: response.data,
-        loading: { ...prev.loading, uv: false },
+        isLoading: { ...prev.isLoading, uv: false },
       }));
 
       return response.data;
@@ -169,7 +172,7 @@ export const GlobalContextProvider = ({ children }) => {
       console.error("Error Fetching UV Data:", error.message);
       setState((prev) => ({
         ...prev,
-        loading: { ...prev.loading, uv: false },
+        isLoading: { ...prev.isLoading, uv: false },
         errors: { ...prev.errors, uv: error.message },
       }));
       return null;
