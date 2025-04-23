@@ -163,7 +163,7 @@ const FiveDayForecast = () => {
         {calendar} 5-Day Forecast for {city.name}
       </h2>
 
-      <div className="forecast-list mt-3 space-y-8">
+      <div className="forecast-list mt-2 space-y-5">
         {fiveDayForecasts.map((day, i) => {
           const tempGradient = getTemperatureGradient(day.minTemp, day.maxTemp);
 
@@ -172,22 +172,32 @@ const FiveDayForecast = () => {
               key={i}
               className="daily-forecast flex flex-col gap-2 border-b border-gray-200 py-2 last:border-b-0 dark:border-gray-700"
             >
-              <div className="flex justify-between">
+              <div className="flex items-center justify-between">
                 <p className="font-medium">{day.dayName}</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">
+                <p className="text-xs text-gray-800 dark:text-gray-400">
                   {day.dayDate}
                 </p>
               </div>
 
               <div className="flex flex-1 items-center justify-between gap-4">
-                <p className="w-12 font-medium">{day.minTemp}°C</p>
+                <div className="flex w-12 flex-col items-start">
+                  <span className="text-xs text-gray-800 dark:text-gray-400">
+                    Low
+                  </span>
+                  <p className="font-medium">{day.minTemp}°C</p>
+                </div>
                 <div className="flex items-center">
                   {getWeatherIcon(day.weatherCondition)}
                 </div>
                 <div
                   className={`temperature h-2 flex-1 rounded-full ${tempGradient}`}
                 ></div>
-                <p className="w-12 text-right font-medium">{day.maxTemp}°C</p>
+                <div className="flex w-12 flex-col items-end">
+                  <span className="text-xs text-gray-800 dark:text-gray-400">
+                    High
+                  </span>
+                  <p className="font-medium">{day.maxTemp}°C</p>
+                </div>
               </div>
             </div>
           );
