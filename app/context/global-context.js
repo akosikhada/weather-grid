@@ -34,6 +34,10 @@ export const GlobalContextProvider = ({ children }) => {
     airPollutionData: {},
     dailyForecastData: {},
     uvData: {},
+    activeCityCoords: {
+      lat: DEFAULT_LATITUDE,
+      lon: DEFAULT_LONGITUDE,
+    },
     isLoading: {
       forecast: false,
       airPollution: false,
@@ -48,6 +52,14 @@ export const GlobalContextProvider = ({ children }) => {
     },
   });
 
+  // Function to set active city coordinates
+  const setActiveCityCoords = useCallback((lat, lon) => {
+    setState((prev) => ({
+      ...prev,
+      activeCityCoords: { lat, lon },
+    }));
+  }, []);
+
   // Memoized fetch functions to prevent unnecessary re-renders
   // Fetch Forecast Data
   const fetchForecastData = useCallback(async () => {
@@ -58,9 +70,8 @@ export const GlobalContextProvider = ({ children }) => {
     }));
 
     try {
-      // Use default coordinates from constants
-      const lat = DEFAULT_LATITUDE;
-      const lon = DEFAULT_LONGITUDE;
+      // Use active city coordinates
+      const { lat, lon } = state.activeCityCoords;
 
       const response = await axios.get(`/api/weather?lat=${lat}&lon=${lon}`);
       setState((prev) => ({
@@ -79,7 +90,7 @@ export const GlobalContextProvider = ({ children }) => {
       }));
       return null;
     }
-  }, []);
+  }, [state.activeCityCoords]);
 
   // Fetch Air Pollution Data
   const fetchAirPollutionData = useCallback(async () => {
@@ -90,9 +101,8 @@ export const GlobalContextProvider = ({ children }) => {
     }));
 
     try {
-      // Use default coordinates from constants
-      const lat = DEFAULT_LATITUDE;
-      const lon = DEFAULT_LONGITUDE;
+      // Use active city coordinates
+      const { lat, lon } = state.activeCityCoords;
 
       const response = await axios.get(`/api/pollution?lat=${lat}&lon=${lon}`);
       setState((prev) => ({
@@ -111,7 +121,7 @@ export const GlobalContextProvider = ({ children }) => {
       }));
       return null;
     }
-  }, []);
+  }, [state.activeCityCoords]);
 
   // Daily forecast data fetch function
   const fetchDailyForecastData = useCallback(async () => {
@@ -122,9 +132,8 @@ export const GlobalContextProvider = ({ children }) => {
     }));
 
     try {
-      // Use default coordinates from constants
-      const lat = DEFAULT_LATITUDE;
-      const lon = DEFAULT_LONGITUDE;
+      // Use active city coordinates
+      const { lat, lon } = state.activeCityCoords;
 
       const response = await axios.get(
         `/api/daily-forecast?lat=${lat}&lon=${lon}`,
@@ -145,7 +154,7 @@ export const GlobalContextProvider = ({ children }) => {
       }));
       return null;
     }
-  }, []);
+  }, [state.activeCityCoords]);
 
   // UV data fetch function
   const fetchUVData = useCallback(async () => {
@@ -156,9 +165,8 @@ export const GlobalContextProvider = ({ children }) => {
     }));
 
     try {
-      // Use default coordinates from constants
-      const lat = DEFAULT_LATITUDE;
-      const lon = DEFAULT_LONGITUDE;
+      // Use active city coordinates
+      const { lat, lon } = state.activeCityCoords;
 
       const response = await axios.get(`/api/uv?lat=${lat}&lon=${lon}`);
       setState((prev) => ({
@@ -177,7 +185,7 @@ export const GlobalContextProvider = ({ children }) => {
       }));
       return null;
     }
-  }, []);
+  }, [state.activeCityCoords]);
 
   // Fetch all data in parallel
   const fetchAllData = useCallback(async () => {
@@ -209,6 +217,7 @@ export const GlobalContextProvider = ({ children }) => {
           fetchDailyForecastData,
           fetchUVData,
           fetchAllData,
+          setActiveCityCoords,
         }}
       >
         {children}
