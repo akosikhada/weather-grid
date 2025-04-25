@@ -34,6 +34,7 @@ export const GlobalContextProvider = ({ children }) => {
     airPollutionData: {},
     dailyForecastData: {},
     uvData: {},
+    locationSearchData: [],
     activeCityCoords: {
       lat: DEFAULT_LATITUDE,
       lon: DEFAULT_LONGITUDE,
@@ -43,12 +44,14 @@ export const GlobalContextProvider = ({ children }) => {
       airPollution: false,
       dailyForecast: false,
       uv: false,
+      locationSearch: false,
     },
     errors: {
       forecast: null,
       airPollution: null,
       dailyForecast: null,
       uv: null,
+      locationSearch: null,
     },
   });
 
@@ -187,6 +190,38 @@ export const GlobalContextProvider = ({ children }) => {
     }
   }, [state.activeCityCoords]);
 
+  // Location search function
+  const fetchLocationSearchData = useCallback(async (query) => {
+    if (!query || query.trim() === "") return;
+
+    setState((prev) => ({
+      ...prev,
+      isLoading: { ...prev.isLoading, locationSearch: true },
+      errors: { ...prev.errors, locationSearch: null },
+    }));
+
+    try {
+      const response = await axios.get(
+        `/api/location-search?q=${encodeURIComponent(query)}`,
+      );
+      setState((prev) => ({
+        ...prev,
+        locationSearchData: response.data,
+        isLoading: { ...prev.isLoading, locationSearch: false },
+      }));
+
+      return response.data;
+    } catch (error) {
+      console.error("Error Fetching Location Search Data:", error.message);
+      setState((prev) => ({
+        ...prev,
+        isLoading: { ...prev.isLoading, locationSearch: false },
+        errors: { ...prev.errors, locationSearch: error.message },
+      }));
+      return null;
+    }
+  }, []);
+
   // Fetch all data in parallel
   const fetchAllData = useCallback(async () => {
     // Run all fetch operations concurrently
@@ -216,6 +251,7 @@ export const GlobalContextProvider = ({ children }) => {
           fetchAirPollutionData,
           fetchDailyForecastData,
           fetchUVData,
+          fetchLocationSearchData,
           fetchAllData,
           setActiveCityCoords,
         }}
