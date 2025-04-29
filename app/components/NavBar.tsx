@@ -20,14 +20,14 @@ const NavBar = () => {
       {/* Main navbar - always visible */}
       <div className="flex w-full items-center justify-between py-4">
         {/* Logo and Title */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center">
           <Image
-            src="/logo.png"
+            src="/weather-grid.png"
             alt="Weather Grid"
             width={100}
             height={100}
             quality={100}
-            className="h-8 w-8"
+            className="h-12 w-12"
           />
           <p className="text-xl font-bold sm:text-2xl">Weather Grid</p>
         </div>
