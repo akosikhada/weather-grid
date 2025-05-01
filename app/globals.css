@@ -218,7 +218,11 @@
 }
 
 body::-webkit-scrollbar {
+  display: none;
+  height: 6px;
   width: 6px;
+  background: #1d1c1c;
+  border-radius: 20px;
 }
 
 body::-webkit-scrollbar-track {
