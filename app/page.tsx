@@ -82,15 +82,20 @@ export default function Home() {
 
       <footer className="mt-4 border-t-2 py-4">
         <div className="flex flex-col items-center gap-4">
-          <p className="max-w-2xl text-center text-[15px] leading-relaxed italic">
+          <i className="max-w-2xl text-center text-base leading-relaxed">
             "An advanced grid-based meteorological platform delivering precise
             weather analytics and forecasting with an intuitive, responsive
             interface."
-          </p>
-          <div className="flex items-center gap-2 text-[13px] font-medium">
+          </i>
+          <div className="flex items-center gap-2 text-sm font-medium">
             <span className="font-medium">
               © {new Date().getFullYear()} Weather Grid. All Rights Reserved.
             </span>
+          </div>
+          <div className="flex space-x-4 text-center">
+            <i className="text-sm text-neutral-600 dark:text-neutral-400">
+              Developed by akosikhada
+            </i>
           </div>
         </div>
       </footer>
