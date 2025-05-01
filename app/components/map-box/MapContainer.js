@@ -39,7 +39,7 @@ function MapContainerComponent({ activeCityCords }) {
       scrollWheelZoom={false}
       className="m-4 rounded-lg"
       style={{ height: "calc(100% - 2rem)", width: "calc(100% - 2rem)" }}
-      zoomControl={false}
+      zoomControl={true}
       attributionControl={false}
     >
       <TileLayer
