@@ -28,12 +28,12 @@ const SightDistance = () => {
     );
   }
 
-  // Validate data integrity before proceeding with sight distance rendering
+  // Validate data integrity before proceeding with visibility rendering
   if (!forecastData?.main) {
     return (
       <div className="dark:bg-dark-grey flex h-[12rem] flex-col items-center justify-center gap-3 rounded-lg border px-4 pt-6 shadow-sm dark:shadow-none">
         <p className="text-muted-foreground text-sm font-medium">
-          Sight distance data is currently unavailable. Please check back later.
+          Visibility data is currently unavailable. Please check back later.
         </p>
       </div>
     );
@@ -46,14 +46,14 @@ const SightDistance = () => {
 
   const getSightDistanceText = (sightDistanceInKilometers: number) => {
     if (sightDistanceInKilometers > 10)
-      return "CRYSTAL CLEAR! Exceptional sight distance."; // >10km: Exceptional visibility
+      return "CRYSTAL CLEAR! Exceptional visibility."; // >10km: Exceptional visibility
     if (sightDistanceInKilometers > 5)
-      return "CLEAR VIEW! Excellent sight distance."; // 5-10km: Excellent visibility
+      return "CLEAR VIEW! Excellent visibility."; // 5-10km: Excellent visibility
     if (sightDistanceInKilometers > 2)
-      return "MODERATE VIEW! Some sight distance limitations."; // 2-5km: Moderate visibility
+      return "MODERATE VIEW! Some visibility limitations."; // 2-5km: Moderate visibility
     if (sightDistanceInKilometers <= 2)
-      return "LIMITED VIEW! Restricted sight distance ahead."; // less than 2km: Limited visibility
-    return "Unavailable: Sight distance data unavailable";
+      return "LIMITED VIEW! Restricted visibility ahead."; // less than 2km: Limited visibility
+    return "Unavailable: Visibility data unavailable";
   };
 
   const sightDistanceDescription = getSightDistanceText(
@@ -62,9 +62,7 @@ const SightDistance = () => {
 
   return (
     <div className="dark:bg-dark-grey flex h-[12rem] flex-col justify-between rounded-lg border p-4 shadow-sm dark:shadow-none">
-      <h2 className="flex items-center gap-2 font-medium">
-        {eye} Sight Distance
-      </h2>
+      <h2 className="flex items-center gap-2 font-medium">{eye} Visibility</h2>
       <div className="flex flex-col items-center justify-center gap-2">
         <p className="text-[26px] font-bold">{sightDistanceInKilometers} km</p>
       </div>
