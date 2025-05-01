@@ -59,7 +59,7 @@ const SearchDialog = () => {
         <DialogTrigger asChild>
           <Button
             variant="outline"
-            className="inline-flex h-10 w-full items-center justify-between px-3 duration-200 ease-in-out hover:bg-slate-100 hover:dark:bg-[#131313]"
+            className="inline-flex h-10 w-full cursor-text items-center justify-between px-3 duration-200 ease-in-out hover:bg-slate-100 hover:dark:bg-[#131313]"
             onClick={() => setIsOpen(true)}
           >
             <div className="flex items-center">
