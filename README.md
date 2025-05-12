@@ -1,7 +1,7 @@
 # 🌦️ Weather Grid
 
 <div align="center">
-  <img src="./public/logo.png" alt="Weather Grid Logo" width="200" height="200" />
+  <img src="./public/weather-grid.png" alt="Weather Grid Logo" width="200" height="200" />
 </div>
 
 <div align="center">
