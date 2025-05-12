@@ -115,6 +115,7 @@ const UvIndex = () => {
           value={uvProgressPercentage}
           max={14}
           className="progress"
+          aria-label="UV Index Progress"
         />
       </div>
       <p className="text-[13px]">{category.description}</p>
