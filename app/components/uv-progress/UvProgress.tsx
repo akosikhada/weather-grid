@@ -7,14 +7,17 @@ import { cn } from "@/lib/utils";
 
 const UvProgress = React.forwardRef<
   React.ElementRef<typeof ProgressPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof ProgressPrimitive.Root>
->(({ className, value, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof ProgressPrimitive.Root> & {
+    "aria-label"?: string;
+  }
+>(({ className, value, "aria-label": ariaLabel, ...props }, ref) => (
   <ProgressPrimitive.Root
     ref={ref}
     className={cn(
       "bg-secondary relative h-3 w-full overflow-hidden rounded-full",
       className,
     )}
+    aria-label={ariaLabel}
     {...props}
   >
     <ProgressPrimitive.Indicator
