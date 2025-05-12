@@ -89,7 +89,12 @@ const AirPollution = () => {
           </span>
           <span className="font-medium">{aqiValue}%</span>
         </div>
-        <Progress value={aqiValue} max={100} className="progress" />
+        <Progress
+          value={aqiValue}
+          max={100}
+          className="progress"
+          aria-label="Air Quality Index Progress"
+        />
       </div>
       <p className="text-[15px]">
         Air Quality is {aqiInfo?.description || "Unavailable"}
